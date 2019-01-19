@@ -21,7 +21,7 @@ class AboutSequencesAndArrays extends KoanSuite  {
 
   koan("You can create a sequence from a for comprehension") {
     val s = for (v <- 1 to 4) yield v
-    s.toList should be(__)
+    s.toList should be(List(1,2,3,4))
   }
 
   koan("You can create a sequence from a for comprehension with a condition") {
