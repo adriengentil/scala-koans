@@ -43,10 +43,11 @@ class AboutFutures extends KoanSuite {
 
     // Let's multiply this int by 2.
     // How can we do this without blocking the thread?
-    val eventuallyResult: Future[Int] = ???
-
+    val eventuallyResult: Future[Int] = eventuallyInt flatMap {
+      case x => Future.successful(x * 2)
+    }
     // Here we block the thread until the future is completed
-    Await.result(eventuallyResult, atMost = 5 seconds) should be(176)
+    Await.result(eventuallyResult, atMost = 5 seconds) should be(84)
   }
 
   koan("Composing a future with another future value") {
@@ -64,7 +65,7 @@ class AboutFutures extends KoanSuite {
     val eventuallyInt: Future[Int] = Future.successful(43)
 
     // It is actually just a future...
-    Await.result(eventuallyInt, atMost = 5 seconds) should be(__)
+    Await.result(eventuallyInt, atMost = 5 seconds) should be(43)
   }
 
   koan("If the asynchronous computation fails, the Future handles the failure") {

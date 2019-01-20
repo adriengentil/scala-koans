@@ -8,8 +8,8 @@ class AboutImportsAndPackages extends KoanSuite  {
   koan("An import can be placed in a method, hint this koan is a method") {
     import scala.collection.mutable.ArrayBuffer
     val arrayBuffer = ArrayBuffer.range(2, 10)
-    arrayBuffer(0) should be(__)
-    arrayBuffer(1) should be(__)
+    arrayBuffer(0) should be(2)
+    arrayBuffer(1) should be(3)
   }
 }
 
@@ -21,7 +21,7 @@ class AboutImportsAndPackagesInSubpackages extends KoanSuite  {
   koan("A package can be included in a file with an established established package, " +
           "and can encapsulate it's contents with a {} block") {
     val luther = new Artist("Luther", "Vandross")
-    luther.lastName should be(__)
+    luther.lastName should be("Vandross")
   }
 }
 
@@ -43,7 +43,7 @@ class AboutReferencingAbsolutePackages extends KoanSuite  {
   // <<< Note the import style
   koan("A import can be done based from absolute package heirarchy") {
     val stLouisBlues = new Album("St. Louis Blues", 1940, new Artist("Louie", "Armstrong"))
-    stLouisBlues.getClass.getCanonicalName should be(__)
+    stLouisBlues.getClass.getCanonicalName should be("album.Album")
   }
 }
 
@@ -54,7 +54,7 @@ class AboutReferencingAbsoluteRootPackages extends KoanSuite  {
   // <<< Note the import style
   koan("A import can be done based from absolute root package heirarchy using _root_") {
     val stLouisBlues = new Album("St. Louis Blues", 1940, new Artist("Louie", "Armstrong"))
-    stLouisBlues.getClass.getCanonicalName should be(__)
+    stLouisBlues.getClass.getCanonicalName should be("album.Album")
   }
 }
 
@@ -65,7 +65,7 @@ class AboutReferencingRelativePackages extends KoanSuite  {
   // <<< Note the import style
   koan("A import can be done based from relative packaging") {
     val stLouisBlues = new Album("St. Louis Blues", 1940, new Artist("Louie", "Armstrong"))
-    stLouisBlues.getClass.getCanonicalName should be(__)
+    stLouisBlues.getClass.getCanonicalName should be("album.Album")
   }
 }
 

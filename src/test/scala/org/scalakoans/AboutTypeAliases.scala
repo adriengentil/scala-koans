@@ -9,7 +9,7 @@ class AboutTypeAliases extends KoanSuite  {
 
     type Pupil = Student
     val harryPotter = new Pupil("Harry", "Potter")
-    harryPotter.firstName should be(__)
+    harryPotter.firstName should be("Harry")
   }
 
   koan("""Although you can't make an type alias of an singleton object,
@@ -26,8 +26,8 @@ class AboutTypeAliases extends KoanSuite  {
     val Observatory = StarGaze
     val LoversLookout: Observatory.type = Observatory
 
-    Observatory.lookOntoTheSky should be(__)
-    LoversLookout.lookOntoTheSky should be(__)
+    Observatory.lookOntoTheSky should be("I see Scorpio to the south")
+    LoversLookout.lookOntoTheSky should be("I see Scorpio to the south")
   }
 
   koan("""You can use <object-name>.type as a method parameter to accept singleton objects.""") {

@@ -1,6 +1,6 @@
 package org.scalakoans
 
-
+import scala.util.Try
 import org.scalakoans.support.KoanSuite
 
 class AboutFunctionalProgramming extends KoanSuite {
@@ -18,7 +18,13 @@ class AboutFunctionalProgramming extends KoanSuite {
     // The apartment building is very tall, and the basement is very deep;
     // you will never find the top or bottom floors.
 
-    def targetFloor(instructions: String): Int = ???
+    def targetFloor(instructions: String): Int = instructions.foldLeft(0){
+      (`running total`, `next element`) => `next element` match {
+        case '(' => `running total` + 1
+        case ')' => `running total` - 1
+        case _ => `running total`
+      }
+    }
 
     targetFloor("(())") should be(0)
     targetFloor("()()") should be(0)
@@ -44,7 +50,19 @@ class AboutFunctionalProgramming extends KoanSuite {
     //
     // You also need a little extra paper for each box: the area of the smallest side.
 
-    def wrappingPaperToOrder(boxes: String): Int = ???
+    def wrappingPaperToOrder(boxes: String): Int = {
+      val areas = boxes
+                  .split(",")
+                  .map{
+                    _.split("x").flatMap(x => Try(x.toInt).toOption)
+                  }
+                  .filter(_.size == 3)
+                  .map{dim => 
+                    val sideAreas = Seq(2 * dim(0) * dim(1), 2 * dim(1) * dim(2), 2 * dim(0) * dim(2))
+                    sideAreas.sum + sideAreas.min / 2
+                  }
+      areas.sum
+    }
 
     wrappingPaperToOrder("2x3x4") should be(58)
     wrappingPaperToOrder("1x1x10") should be(43)
